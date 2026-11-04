@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trustsim-hitl"
+version = "0.1.0"
+description = "Research prototype for human-supervised safety evaluation in autonomous mobility simulations"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "viswa485" }]
+keywords = ["human-in-the-loop", "trustworthy-ai", "autonomous-driving", "simulation", "AI-safety"]
+classifiers = ["Development Status :: 3 - Alpha", "Intended Audience :: Science/Research", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3.11", "Programming Language :: Python :: 3.12", "Programming Language :: Python :: 3.13", "Topic :: Scientific/Engineering :: Artificial Intelligence"]
+dependencies = ["numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+rl = ["gymnasium>=1.0,<2", "stable-baselines3>=2.0,<3"]
+dev = ["pytest>=8.0", "ruff>=0.8"]
+
+[project.scripts]
+trustsim = "trustsim.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
