@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 import numpy as np
 
@@ -20,7 +20,7 @@ class FeedbackCalibrator:
         self.n_records = 0
         self.sources: set[str] = set()
 
-    def fit(self, records: Iterable[FeedbackRecord]) -> "FeedbackCalibrator":
+    def fit(self, records: Iterable[FeedbackRecord]) -> FeedbackCalibrator:
         rows = list(records)
         if not rows:
             raise ValueError("At least one feedback record is required")
@@ -110,5 +110,7 @@ def load_feedback_jsonl(path: str | Path) -> list[FeedbackRecord]:
             try:
                 records.append(FeedbackRecord.from_dict(json.loads(line)))
             except (TypeError, ValueError, KeyError, json.JSONDecodeError) as exc:
-                raise ValueError(f"Invalid feedback record on line {line_number}: {exc}") from exc
+                raise ValueError(
+                    f"Invalid feedback record on line {line_number}: {exc}"
+                ) from exc
     return records
