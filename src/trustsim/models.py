@@ -7,6 +7,8 @@ from typing import Any
 
 
 class Action(IntEnum):
+    """Longitudinal control actions available in the toy environment."""
+
     ACCELERATE = 0
     COAST = 1
     BRAKE = 2
@@ -14,6 +16,8 @@ class Action(IntEnum):
 
 @dataclass(frozen=True, slots=True)
 class Scenario:
+    """One reproducible lead-vehicle scenario."""
+
     scenario_id: str
     initial_speed_mps: float
     lead_speed_mps: float
@@ -41,6 +45,8 @@ class Scenario:
 
 @dataclass(frozen=True, slots=True)
 class Observation:
+    """Observable state used by policies and safety monitors."""
+
     ego_speed_mps: float
     lead_speed_mps: float
     gap_m: float
@@ -52,8 +58,12 @@ class Observation:
 
     def as_vector(self) -> list[float]:
         return [
-            self.ego_speed_mps, self.lead_speed_mps, self.gap_m,
-            self.road_friction, self.visibility, self.time_to_collision_s,
+            self.ego_speed_mps,
+            self.lead_speed_mps,
+            self.gap_m,
+            self.road_friction,
+            self.visibility,
+            self.time_to_collision_s,
         ]
 
 
@@ -86,5 +96,5 @@ class FeedbackRecord:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, payload: dict[str, Any]) -> "FeedbackRecord":
+    def from_dict(cls, payload: dict[str, Any]) -> FeedbackRecord:
         return cls(**payload)
