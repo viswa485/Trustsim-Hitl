@@ -16,7 +16,7 @@
 | Unsafe-step rate | 0.041 | 0.023 | 0.024 |
 | Completion rate | 0.940 | 0.970 | 0.970 |
 
-Additional outputs are available in the locally generated summary JSON and episode CSV. The command used was `PYTHONPATH=src python -m trustsim.cli run --episodes 100 --seed 2026 --output-dir results/run-100`.
+Additional outputs are available in the locally generated summary JSON and episode CSV. The local verification command was `PYTHONPATH=src python -m trustsim.cli run --episodes 100 --seed 2026 --output-dir /tmp/trustsim-check`.
 
 ## Interpretation limits
 
